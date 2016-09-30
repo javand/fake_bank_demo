@@ -1,0 +1,1 @@
+insert into user(first_name,last_name,email,created) values ('Daddy','Warbucks','oliver@anniesdad.com',CURRENT_TIMESTAMP );

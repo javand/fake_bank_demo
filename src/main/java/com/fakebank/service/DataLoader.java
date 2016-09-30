@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 import javax.annotation.PostConstruct;
 
 @Service
@@ -37,5 +38,12 @@ public class DataLoader {
         accountRepository.save(account);
 
 
+        //find an existing users with a certain last name and create accounts for them
+        for (User warBucks : userRepository.findByLastName("Warbucks")){
+            Account bigBucks = new Account(new BigDecimal(500.00));
+            bigBucks.setAccountType(Account.AccountType.SAVINGS);
+            bigBucks.setUser(warBucks);
+            accountRepository.save(bigBucks);
+        }
     }
 }

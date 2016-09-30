@@ -1,9 +1,7 @@
 package com.fakebank.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.transaction.TransactionStatus;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -14,12 +12,17 @@ public class Transaction {
     @Id @GeneratedValue
     private long id;
     private BigDecimal amount;
+
     @ManyToOne(optional = false)
     private Account account;
+
     @Enumerated(EnumType.STRING)
+    @NotNull
     private TransactionType transactionType;
+
     @Enumerated(EnumType.STRING)
     private TransactionStatus transactionStatus;
+
     private Date created;
     private Date updated;
 

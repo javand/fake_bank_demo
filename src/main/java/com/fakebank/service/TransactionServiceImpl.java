@@ -12,9 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
-/**
- * Created by Javan on 9/23/16.
- */
 @Service
 public class TransactionServiceImpl implements TransactionService{
     private AccountRepository accountRepository;
@@ -66,9 +63,11 @@ public class TransactionServiceImpl implements TransactionService{
     public boolean valid(Transaction transaction){
         if (transaction.getAccount() == null)
             return false;
-        Account account = accountRepository.findOne(transaction.getAccount().getId());
-        if (account == null)
+        else if (transaction.getAmount() == null)
             return false;
-        return true;
+        else if (transaction.getTransactionType() == null)
+            return false;
+        Account account = accountRepository.findOne(transaction.getAccount().getId());
+        return account != null;
     }
 }
